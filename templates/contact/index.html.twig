@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<div class="contact">
+	<div class="row">
+		<div class="col-md-4 contact__img">
+			<div class="img__wrap">
+				<img src="assets/img/bg/contact.png" alt="">
+			</div>
+		</div>
+		<div class="col-md-8 contact__content">
+			<div class="container">
+				<div class="content__wrap space-y-20">
+					<div class="space-y-20">
+						<h1 class="text-left">Salut, 🖐 nous sommes NFT MARKET.</h1>
+						<p class="contact__desc">Nous sommes là pour vous aider et répondre à toutes vos questions.<br>
+							Nous avons hâte d'avoir de vos nouvelles 🙂
+						</p>
+					</div>
+					{{form_start(form)}}
+					<div class="box is__big">
+						<div class="space-y-10 mb-0">
+							<div class="row">
+								<div class="col-sm-6 space-y-20">
+									<div class="space-y-10">
+										<span class="nameInput">Votre adresse e-mail</span>
+									{{form_widget(form.email, {'attr': {'class': 'form-control'}})}}
+									</div>
+									<div class="space-y-10">
+										<span class="nameInput">Nom</span>
+										{{form_widget(form.name, {'attr': {'class': 'form-control'}})}}
+									</div>
+								</div>
+								<div class="col-sm-6 space-y-20 mt-10">
+									<div class="space-y-10">
+										<span class="nameInput">Numero</span>
+										{{form_widget(form.phone, {'attr': {'class': 'form-control'}})}}
+									</div>
+									<div class="space-y-10">
+										<span class="nameInput">Subject</span>
+									{{form_widget(form.subject, {'attr': {'class': 'form-control'}})}}
+									</div>
+								</div>
+								<div class="col-12 mt-20">
+									<div class="space-y-10">
+										<span class="nameInput">Message</span>
+										{{form_widget(form.message, {'attr': {'class': 'form-control'}})}}
+									</div>
+								</div>
+								
+							</div>
+							<input type="submit" class="btn btn-grad btn-lg" data-toggle="modal"data-target="#popup_bid" value="Envoyer"> 
+							<input type="reset" class="btn btn-grad btn-lg" data-toggle="modal"data-target="#popup_bid" value="annuler">
+						</div>
+						{{form_rest(form)}}
+							{%for message in app.Flashes('success') %}
+							<div class="alert alert-success" role="alert">
+								{{message}}
+							</div>
+							{%endfor %}
+					</div>
+					{{form_end(form)}}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

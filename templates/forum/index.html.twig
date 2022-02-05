@@ -1,0 +1,175 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
+<div class="hero_forum bg_white">
+    <div class="requests">
+        <div class="container">
+            <div class="row gx-5 justify-content-center">
+
+                <div class="col-lg-8 col-md-10 requests__content">
+                    <div class="requests__wrap space-y-20">
+                        <div>
+                            <h1 class="text-left">Ajouter des questions </h1>
+                        </div>
+                        {{form_start(form)}}
+                        <div class="box is__big">
+                            <div class="space-y-20 mb-0">
+                                <div class="space-y-10">
+                                    <span class="nameInput">Votre Email</span>
+                                    {{form_widget(form.email, {'attr': {'class': 'form-control'}})}}
+                                </div>
+                                <div class="space-y-10">
+                                    <span class="nameInput">Titre </span>
+                                    {{form_widget(form.titre, {'attr': {'class': 'form-control'}})}}
+                                </div>
+                                <div class="space-y-10">
+                                    <span class="nameInput">Ajouter vos questions</span>
+                                    {{form_widget(form.message, {'attr': {'class': 'form-control'}})}}
+                                </div>
+                                <div>
+                                    <input type="submit" class="btn btn-grad btn-lg" data-toggle="modal"
+                                        data-target="#popup_bid" value="Envoyer">
+                                    <input type="reset" class="btn btn-grad btn-lg" data-toggle="modal"
+                                        data-target="#popup_bid" value="annuler">
+                                </div>
+                            </div>
+                        </div>
+                        {{form_rest(form)}}
+                        {%for message in app.Flashes('success') %}
+                        <div class="alert alert-success" role="alert">
+                            {{message}}
+                        </div>
+                        {%endfor %}
+                    </div>
+                    {{form_end(form)}}
+                </div>
+                <div class="col-lg-4 contact__img">
+                    <div class="img__wrap">
+                        <img src="assets/img/bg/requests.png" alt="">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+</div>
+
+<section class="section forum mt-100">
+{% for forum in forums %}
+    <div class="container-md">
+         
+        <div class="row sm:space-y-30">
+            <div class="box is__big space-y-20">
+                   
+
+                <div class="d-flex justify-content-between
+                    align-items-center">
+                    <div class="d-flex align-items-center
+                        space-x-15">
+                        <div class="avatars space-x-10">
+                            <div class="media has_border">
+                                <a href="Profile.html">
+                                    <img src="assets/img/avatars/avatar_3.png" alt="Avatar" class="avatar
+                                        avatar-forum">
+                                </a>
+                            </div>
+                            <div class="text-center">
+                                <a href="Profile.html">
+                                    <p class="avatars_name
+                                        color_brand">{{ forum.email }}</p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="category">
+                            {# <p class="color_black"><span class="color_text">in:</span>
+                                General
+                            </p> #}
+                        </div>
+                    </div>
+                    <div>
+                        {# <div class="avatars space-x-3">
+                            <div class="-space-x-20">
+                                <a class="d-none d-sm-inline" href="Profile.html">
+                                    <img src="assets/img/avatars/avatar_1.png" alt="Avatar" class="avatar
+                                        avatar-sm">
+                                </a>
+                                <a class="d-none d-sm-inline" href="Profile.html">
+                                    <img src="assets/img/avatars/avatar_2.png" alt="Avatar" class="avatar
+                                        avatar-sm">
+                                </a>
+                                <a class="d-none d-sm-inline" href="Profile.html">
+                                    <img src="assets/img/avatars/avatar_4.png" alt="Avatar" class="avatar
+                                        avatar-sm">
+                                </a>
+                                <a href="Profile.html">
+                                    <img src="assets/img/avatars/avatar_5.png" alt="Avatar" class="avatar
+                                        avatar-sm">
+                                </a>
+                                <a href="Profile.html">
+                                    <img src="assets/img/avatars/avatar_6.png" alt="Avatar" class="avatar
+                                        avatar-sm">
+                                </a>
+                                <span class="total__avatars">+20</span>
+                            </div> 
+                        </div>#}
+                    </div>
+                </div>
+                <div class="d-flex">
+                    {# <div class="number">
+                        <span>42</span>
+                    </div> #}
+                    <div class="space-y-20">
+                        <a href="post_details.html">
+                            <h3 class="forum__title">{{ forum.titre }}</h3>
+                        </a>
+                        <p class="forum__desc">{{ forum.message }}</p>
+                        {# <div class="tags">
+                            <span>#NFT Marketplace</span>
+                            <span>#crypto Artists</span>
+                            <span>#NFT Artists</span>
+                        </div>
+                        <div class="hr"></div>
+                        <div class="d-flex
+                            justify-content-between flex-wrap">
+                            <div class="reaction">
+                                <a href="#" class="likes
+                                    space-x-3">
+                                    <i class="ri-heart-3-fill"></i>
+                                    <span class="txt_sm">2.1k</span>
+                                </a>
+                                <a href="post_details.html" class="comments space-x-3">
+                                    <i class="ri-chat-1-line"></i>
+                                    <span class="txt_sm">257
+                                        Comments</span>
+                                </a>
+                                <span class="views space-x-3">
+                                    <i class="ri-eye-line"></i>
+                                    <span>257 Views</span>
+                                </span>
+                                <span class="time space-x-3">
+                                    <i class="ri-time-line"></i>
+                                    <span>2 days ago</span>
+                                </span>
+                            </div> #}
+                            <div class="answer">
+                                <a href="#" class="btn btn-dark
+                                    btn-sm">Answer</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+    {% endfor %}
+</section>
+
+
+
+{% endblock %}

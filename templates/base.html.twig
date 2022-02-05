@@ -1,19 +1,396 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}TN-NFT{% endblock %}</title>
+    <!-- <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>"> -->
+    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+    {% block stylesheets %}
+    <link rel="stylesheet" href="{{asset('assets/css/plugins/remixicon.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/css/plugins/bootstrap.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/css/plugins/swiper-bundle.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}" />
+    {% endblock %}
+    {% block javascripts %}
+    <script src="{{asset('assets/js/jquery-3.6.0.js')}}"></script>
+    <script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('assets/js/swiper-bundle.min.js')}}"></script>
+    <script src="{{asset('assets/js/gsap.min.js')}}"></script>
+    <script src="{{asset('assets/js/ScrollTrigger.min.js')}}"></script>
+    <script src="{{asset('assets/js/sticky-sidebar.js')}}" ></script>
+    <script src="{{asset('assets/js/script.js')}}"></script>
+    <script src="cdn.jsdelivr.net/npm/web3%40latest/dist/web3.min.js"></script>
+    <script src="../unpkg.com/moralis%401.1.0/dist/moralis.js"></script>
+    <script src="{{asset('assets/js/nft.js')}}"></script>
+    <script src="../unpkg.com/%40lottiefiles/lottie-player%401.5.4/dist/lottie-player.js"></script>
+    {% endblock %}
+</head>
+
+<body class="body is__dark">
+    {% block header %}
+    <div class="overflow-hidden">
+        <header class="header__1 js-header" id="header">
+            <div class="container">
+                <div class="wrapper js-header-wrapper">
+                    <div class="header__logo">
+                        <a href="index.html">
+                            <img class="header__logo" id="logo_js" src="assets/img/logos/TNnftWA.png" alt="logo" />
+                        </a>
+                    </div>
+
+                    <!-- ==================  -->
+                    <div class="header__menu">
+                        <ul class="d-flex space-x-20">
+                            <li class="has_popup">
+                                <a class="color_black is_new" href="/">
+                                    <!-- <i class="ri-more-2-fill"></i> -->Acceuil
+                                </a>
+                                <!-- <ul class="menu__popup space-y-20">
+                                    <li>
+                                        <a href="Home1.html">
+                                            <i class="ri-home-smile-2-line"></i>
+                                            Home page 1
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="Home2.html">
+                                            <i class="ri-home-2-line"></i> Home page 2</a>
+                                    </li>
+                                    <li>
+                                        <a href="Home3.html">
+                                            <i class="ri-home-5-line"></i> Home page 3</a>
+                                    </li>
+                                    <li>
+                                        <a href="Home5.html" class="is_new">
+                                            <i class="ri-home-5-line"></i> Home page 4</a>
+                                    </li>
+                                </ul> -->
+                            </li>
+                            <li>
+                                <a class="color_black" href="/marketplace"> Marché</a>
+                            </li>
+                            <li>
+                                <a class="color_black" href="/collections"> Collections</a>
+                            </li>
+                            <!-- <li>
+                                <a class="color_black" href="Profile.html"> Profile</a>
+                            </li> -->
+                            <li>
+                                <a class="color_black" href="/createurs"> Créateurs</a>
+                            </li>
+                            <li>
+                                <a href="/forum">
+                                    <!-- <i class="ri-chat-check-line"> --></i>
+                                    Forum
+                                </a>
+                            </li>
+                            <li>
+                                <a class="color_black" href="/contact">
+                                    <!-- <i class="ri-customer-service-2-line"></i> -->
+                                    Contact
+                                </a>
+                            </li>
+                            <!-- <li>
+                                <a class="color_black" href="kit.html"> Ui Kit </a>
+                            </li> -->
+                            <li class="has_popup2">
+                                <!-- <a class="color_black is_new" href="#">Pages <i class="ri-more-2-fill"></i></a> -->
+                                <ul class="menu__popup2 space-y-20">
+                                    <div class="row sub_menu_row">
+
+                                        <div class="col-lg-6 space-y-10">
+
+                                            <!-- <li>
+                                                <a href="Activity.html">
+                                                    <i class="ri-line-chart-line"></i>
+                                                    Activity
+                                                </a>
+                                            </li>
+                                             -->
+                                            <li>
+                                                <a class="is_new" href="edit_profile.html">
+                                                    <i class="ri-edit-line"></i>
+                                                    Edit Profile
+                                                </a>
+                                            </li>
+
+
+                                            <li>
+                                                <a href="Item-details.html">
+                                                    <i class="ri-gallery-line"></i>
+                                                    Item details
+                                                </a>
+                                            </li>
+                                            <!-- <li>
+                                                <a class="is_new" href="Live_Auctions.html">
+                                                    <i class="ri-auction-line"></i>
+                                                    Live Auctions
+                                                </a>
+                                            </li> -->
+
+                                            <!-- <li>
+                                                <a href="Upcoming_projects.html">
+                                                    <i class="ri-upload-line"></i>
+                                                    Upcoming projects
+                                                </a>
+                                            </li> -->
+                                            <li>
+                                                <a class="is_new" href="ranking.html">
+                                                    <i class="ri-funds-line"></i>
+                                                    Ranking
+                                                </a>
+                                            </li>
+
+                                            <li>
+                                                <a class="is_new" href="newsletter.html">
+                                                    <i class="ri-mail-open-line"></i>
+                                                    Newsletter
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="forum.html">
+                                                    <i class="ri-discuss-line"></i>
+                                                    Forum & community
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="post_details.html">
+                                                    <i class="ri-chat-check-line"></i>
+                                                    Forum details
+                                                </a>
+                                            </li>
+
+                                            <!-- <li>
+                                                <a href="no_results.html">
+                                                    <i class="ri-file-search-line"></i>
+                                                    No Result
+                                                </a>
+                                            </li> -->
+
+                                            <li>
+                                                <a class="is_new" href="Contact.html">
+                                                    <i class="ri-customer-service-2-line"></i>
+                                                    Contact
+                                                </a>
+                                            </li>
+
+                                        </div>
+
+
+
+
+
+
+
+                                        <div class="col-lg-6 space-y-10">
+
+                                            <li>
+                                                <a href="Upload-type.html">
+                                                    <i class="ri-upload-line"></i>
+                                                    Upload Types
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="Connect-wallet.html">
+                                                    <i class="ri-wallet-3-line"></i>
+                                                    Connect wallet
+                                                </a>
+                                            </li>
+
+                                            <li>
+                                                <a href="questions.html">
+                                                    <i class="ri-question-line"></i>
+                                                    FAQ
+                                                </a>
+                                            </li>
+                                            <!-- <li>
+                                                <a class="is_new" href="Submit_request.html">
+                                                    <i class="ri-share-forward-line"></i>
+                                                    Submit request
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="is_new" href="Submit_request.html">
+                                                    <i class="ri-message-3-line"></i>
+                                                    Request chat
+                                                </a>
+                                            </li> -->
+                                            <li>
+                                                <a class="is_new" href="blog.html">
+                                                    <i class="ri-layout-line"></i>
+                                                    Blog
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="is_new" href="article.html">
+                                                    <i class="ri-newspaper-line"></i>
+                                                    Article
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="register.html">
+                                                    <i class="ri-lock-line"></i>
+                                                    Register
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="login.html">
+                                                    <i class="ri-shield-user-line"></i>
+                                                    Login
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="Privacy.html">
+                                                    <i class="ri-file-text-line"></i>
+                                                    Privacy Policy
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a c href="404-2.html">
+                                                    <i class="ri-file-damage-line"></i>
+                                                    404
+                                                </a>
+                                            </li>
+                                        </div>
+                                    </div>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- ================= -->
+                    <!-- <div class="header__search">
+                        <input type="text" placeholder="Search" />
+                        <button class="header__result">
+                            <i class="ri-search-line"></i>
+                        </button>
+                    </div> -->
+                    <div class="header__btns">
+                        <a class="btn btn-grad btn-sm" href="Connect-wallet.html">
+                            <i class="ri-wallet-3-line"></i>
+                            Connecter le portefeuille</a>
+                        <!-- <a href="#" id="connectbtn">
+                            <img width="45" src="assets/img/icons/metamask.svg" alt="">
+                        </a> -->
+                        <a href="login.html">
+                            <img width="45" src="assets/img/icons/user.png" alt="" style="opacity:90%">
+                        </a>
+                    </div>
+                    <div class="header__burger js-header-burger"></div>
+
+
+                    <!-- <div class="header__mobile js-header-mobile">
+                        <div class="header__mobile__menu space-y-40">
+                            <ul class="d-flex space-y-20">
+                                <li> <a class="color_black" href="Marketplace.html"> Marketplace</a> </li>
+                                <li> <a class="color_black" href="Collections.html"> Collections</a> </li>
+                                <li> <a class="color_black" href="Profile.html"> Profile</a> </li>
+                                <li> <a class="color_black" href="Creators.html"> Creators</a> </li>
+                    
+                            </ul>
+                            <div class="space-y-20">
+                                <div class="header__search in_mobile w-full">
+                                    <input type="text" placeholder="Search" />
+                                    <button class="header__result">
+                                        <i class="ri-search-line"></i>
+                                    </button>
+                                </div>
+                                <a class="btn btn-grad btn-sm" href="Connect-wallet.html">Connect
+                                    wallet</a>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </header>
+    </div>
+    <!-- ====== headers -->
+    {% endblock %}
+     {% block body %}{% endblock %}
+
+    {% block footer %}
+    <footer class="footer__1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 space-y-20">
+                    <div class="footer__logo">
+                        <a href="index.html">
+                            <img src="assets/img/logos/TNnftWA.png" alt="logo" width="20%" height="20%">
+                        </a>
+                    </div>
+                    <p class="footer__text">
+                        TN-NFT est un contrat intelligent du marché NFT à liquidité partagée
+                    </p>
+                    <div>
+                        <ul class="footer__social space-x-10 mb-40">
+                            <li> <a href="#"> <i class="ri-facebook-line"></i> </a>
+                            </li>
+                            <li> <a href="#"> <i class="ri-messenger-line"></i> </a>
+                            </li>
+                            <li> <a href="#"> <i class="ri-whatsapp-line"></i> </a>
+                            </li>
+                            <li> <a href="#"> <i class="ri-youtube-line"></i> </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-6">
+                    <h6 class="footer__title">TN-NFT</h6>
+                    <ul class="footer__list">
+                        <li> <a href="Home1.html"> Home1 </a>
+                        </li>
+                        <li> <a href="Home2.html"> Home2
+                            </a> </li>
+                        <li> <a href="Home3.html"> Home3 </a> </li>
+                        <li> <a href="Marketplace.html"> Marketplace
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-6">
+                    <h6 class="footer__title">Assets</h6>
+                    <ul class="footer__list">
+                        <li> <a href="Profile.html"> Profile </a>
+                        </li>
+                        <li> <a href="Creators.html"> Creators </a>
+                        </li>
+                        <li> <a href="Collections.html"> Colletctions </a>
+                        </li>
+                        <li> <a href="Activity.html"> Activity
+                            </a> </li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-6">
+                    <h6 class="footer__title">Company</h6>
+                    <ul class="footer__list">
+                        <li> <a href="Upload-type.html"> Upload Types </a>
+                        </li>
+                        <li> <a href="Upload.html"> Upload </a> </li>
+                        <li> <a href="Connect-wallet.html"> Connect wallet
+                            </a> </li>
+                        <li> <a href="Item-details.html"> Item details </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <p class="copyright text-center">
+                Copyright © 2022. Créé avec amour par TN-NFT.
+            </p>
+        </div>
+    </footer>
+    <!-- <script>
+        $(".dark").on('click', function (e) {
+    
+        document.getElementById("img_js").src = "assets/img/bg/in_hero1_dark.png"
+    
+    
+    });
+    $(".light").on('click', function (e) {
+        document.getElementById("img_js").src = "assets/img/bg/in_hero1.png"
+    });
+    </script> -->
+    </div>
+    {% endblock %}
+</body>
+
 </html>
