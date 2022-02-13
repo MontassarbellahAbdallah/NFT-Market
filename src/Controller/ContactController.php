@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\EmailSender;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,7 +18,7 @@ use Symfony\Component\Mime\Address;
 class ContactController extends AbstractController
 {
     #[Route('/contact', name: 'contact')]
-    public function index(Request $req , ManagerRegistry $doctrine, MailerInterface $mailer): Response
+    public function index(Request $req , ManagerRegistry $doctrine, MailerInterface $mailer, EmailSender $emailSender): Response
     {
         $em = $doctrine->getManager();
         $contact = new Contact();
@@ -30,16 +31,14 @@ class ContactController extends AbstractController
            $em->persist($contact);
            $em->flush();
            $this->addFlash('success', 'Your message has been sent. Thank you!');
-           $email = (new Email())
+            /*$email = (new Email())
            ->from(new Address('contact.nftmarket@gmail.com', 'NFT-MARKET'))
            ->to($contact->getEmail())
            ->subject('NFT-MARKET CONTACT')
            ->html('<h1>Bienvenu '.$contact->getName().' !</h1><br/><p>nous avons recu votre contact sur : '.$contact->getSubject().' .</p>');
-
-           
-
-  
-   $mailer->send($email);
+            $mailer->send($email);*/
+            $emailSender->envoyer($contact,'NFT-MARKET CONTACT','contact');
+            return $this->redirectToRoute('contact');
 
         }
         return $this->render('contact/index.html.twig', [
