@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<div class="edit_profile register">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7"></div>
+            <div class="col-lg-5">
+                <div class="right_part space-y-20">
+                    <h1 class="color_white"> Bienvenue à NFT-MARKET </h1>
+                    <p class="color_white" style="color: white !important">Vous n'avez pas encore de compte?<a
+                            href="/inscription"> S'inscrire </a>
+                    </p>
+                    <form method="post">
+                        <div class="box edit_box w-full space-y-20">
+                            <div class="space-y-10">
+                                <span class="nameInput">Email </span>
+                                <div class="confirm">
+                                    <input type="text" value="{{ last_username }}" name="email" id="inputEmail"
+                                        class="form-control" autocomplete="email" required autofocus
+                                        placeholder="Entrer votre email" />
+                                </div>
+                            </div>
+                            <div class="space-y-10">
+                                <span class="nameInput">Mot de passe
+                                </span> </span>
+                                <div class="confirm">
+                                    <input type="password" name="password" id="inputPassword" class="form-control"
+                                        autocomplete="current-password" required
+                                        placeholder="Entrer votre mot de passe" />
+                                </div>
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                            </div>
+                            <!-- <a class="btn btn-white btn-sm color_green"> cliquer  </a> -->
+                            <button class="btn btn-grad w-full btn-lg " type="submit">créer un compte</button>
+                        </div>
+                        {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}
+                        </div>
+                        {% endif %}
+                        {% if app.user %}
+                        <div class="mb-3">
+                            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                        </div>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

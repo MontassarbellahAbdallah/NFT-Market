@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<div class="edit_profile register">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-9">
+                <div class="right_part space-y-20">
+                    <h1 class="color_white"> Enregistrer un nouveau compte</h1>
+
+                    <div class="box edit_box w-full space-y-20">
+                        <div class="row">
+                            <div class="col-lg-12 account-info">
+                                <div class="avatars space-x-20 mb-30">
+                                    <div id="profile-container">
+                                        <h3 class="mb-20"> Créer un compte </h3>
+                                    </div>
+
+                                </div>
+                                {{form_start(form)}}
+                                <div class="form-group space-y-10 mb-0">
+                                    <div class="space-y-20">
+                                        <div class="space-y-10">
+                                            <span class="nameInput">Email</span>
+                                            {{form_widget(form.email, {'attr': {'class': 'form-control'}})}}
+                                        </div>
+
+                                        <div class="space-y-10">
+                                            <span class="nameInput d-flex justify-content-between">Nom
+
+                                            </span>
+                                            {{form_widget(form.username, {'attr': {'class': 'form-control'}})}}
+
+                                        </div>
+                                    </div>
+                                    <div class="space-y-10">
+                                        <span class="nameInput">Mot de passe</span>
+                                        {{form_widget(form.password, {'attr': {'class': 'form-control'}})}}
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+
+                        <div class="hr"></div>
+
+                        <button type="submit" class="btn btn-grad">s'inscrire</button>
+                        <button type="reset" class="btn btn-grad">annuler</button>
+
+
+                    </div>
+                    {{form_rest(form)}}
+                                {%for message in app.Flashes('success') %}
+                                <div class="alert alert-success" role="alert">
+                                    {{message}}
+                                </div>
+                                {%endfor %}
+                                {{form_end(form)}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
