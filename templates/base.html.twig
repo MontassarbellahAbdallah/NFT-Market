@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}TN-NFT{% endblock %}</title>
+    <title>{% block title %}NFT MARKET{% endblock %}</title>
     <!-- <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>"> -->
     {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
     {% block stylesheets %}
@@ -35,7 +35,7 @@
                 <div class="wrapper js-header-wrapper">
                     <div class="header__logo">
                         <a href="/">
-                            <img class="header__logo" id="logo_js" src="assets/img/logos/TNnftWA.png" alt="logo" />
+                            <img class="header__logo" id="logo_js" src="assets/img/logos/nft.png" alt="logo" />
                         </a>
                     </div>
 
@@ -272,7 +272,7 @@
                         <!-- <a href="#" id="connectbtn">
                             <img width="45" src="assets/img/icons/metamask.svg" alt="">
                         </a> -->
-                        <a href="login.html">
+                        <a href="/login">
                             <img width="45" src="assets/img/icons/user.png" alt="" style="opacity:90%">
                         </a>
                     </div>
@@ -315,11 +315,11 @@
                 <div class="col-lg-6 space-y-20">
                     <div class="footer__logo">
                         <a href="index.html">
-                            <img src="assets/img/logos/TNnftWA.png" alt="logo" width="20%" height="20%">
+                            <img src="assets/img/logos/nft.png" alt="logo" width="20%" height="20%">
                         </a>
                     </div>
                     <p class="footer__text">
-                        TN-NFT est un contrat intelligent du marché NFT à liquidité partagée
+                        NFT MARKET est un contrat intelligent du marché NFT à liquidité partagée
                     </p>
                     <div>
                         <ul class="footer__social space-x-10 mb-40">
@@ -335,32 +335,32 @@
                     </div>
                 </div>
                 <div class="col-lg-2 col-6">
-                    <h6 class="footer__title">TN-NFT</h6>
+                    <h6 class="footer__title">NFT MARKET</h6>
                     <ul class="footer__list">
-                        <li> <a href="Home1.html"> Home1 </a>
+                        <li> <a href="/">Acceuil</a>
                         </li>
-                        <li> <a href="Home2.html"> Home2
+                        <li> <a href="/marketplace">Marché
                             </a> </li>
-                        <li> <a href="Home3.html"> Home3 </a> </li>
-                        <li> <a href="Marketplace.html"> Marketplace
+                        <li> <a href="/collections">collections</a> </li>
+                        <li> <a href="/createurs">createurs
                             </a>
                         </li>
                     </ul>
                 </div>
                 <div class="col-lg-2 col-6">
-                    <h6 class="footer__title">Assets</h6>
+                    {# <h6 class="footer__title">Assets</h6> #}
                     <ul class="footer__list">
-                        <li> <a href="Profile.html"> Profile </a>
+                        <li> <a href="/forum">forum</a>
                         </li>
-                        <li> <a href="Creators.html"> Creators </a>
+                        <li> <a href="/contact">contact</a>
                         </li>
-                        <li> <a href="Collections.html"> Colletctions </a>
+                        <li> <a href="/login">login</a>
                         </li>
-                        <li> <a href="Activity.html"> Activity
+                        <li> <a href="register">register
                             </a> </li>
                     </ul>
                 </div>
-                <div class="col-lg-2 col-6">
+                {# <div class="col-lg-2 col-6">
                     <h6 class="footer__title">Company</h6>
                     <ul class="footer__list">
                         <li> <a href="Upload-type.html"> Upload Types </a>
@@ -371,10 +371,10 @@
                         <li> <a href="Item-details.html"> Item details </a>
                         </li>
                     </ul>
-                </div>
+                </div> #}
             </div>
             <p class="copyright text-center">
-                Copyright © 2022. Créé avec amour par TN-NFT.
+                Copyright © 2022. Créé avec amour par NFT MARKET.
             </p>
         </div>
     </footer>
