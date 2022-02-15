@@ -1,0 +1,198 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<div class="hero__upload">
+    <div class="container">
+        <div class="space-y-20">
+            <a href="404-9.html" class="btn btn-white btn-sm
+                switch">
+                Switch
+                to Multiple</a>
+            <h2 class="title">Create single collectible</h2>
+
+        </div>
+    </div>
+</div>
+
+{{form_start(form)}}
+
+<div class="modal fade popup" id="popup_preview" tabindex="-1" role="dialog"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal"
+                aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="modal-body space-y-20 p-0">
+                <div class="card__item three m-0 in__popup">
+                    <div class="card_body space-y-10">
+                        <!-- ???? =============== -->
+                        <div class="card_head">
+                            <img src="assets/img/items/item_4.png"
+                                alt="">
+                            <a href="#" class="likes space-x-3">
+                                <i class="ri-heart-3-fill"></i>
+                                <span class="txt_sm">2.1k</span>
+                            </a>
+                            <div class="action">
+                                <a href="#" class="btn btn-primary btn-sm">
+                                    <i class="ri-pie-chart-line color_white"></i>
+                                    Place Your Bid
+                                </a>
+                            </div>
+                        </div>
+                        <!-- ???? =============== -->
+                        <h6 class="card_title">
+                            Colorful Abstract Painting
+                        </h6>
+                        <div class="card_footer d-block space-y-10">
+                            <div class="d-flex justify-content-between">
+                                <div class="creators space-x-10">
+                                    <div class="avatars -space-x-20">
+                                        <a href="Profile.html">
+                                            <img
+                                                src="assets/img/avatars/avatar_3.png"
+                                                alt="Avatar" class="avatar
+                                                avatar-sm">
+                                        </a>
+                                        <a href="Profile.html">
+                                            <img
+                                                src="assets/img/avatars/avatar_2.png"
+                                                alt="Avatar" class="avatar
+                                                avatar-sm">
+                                        </a>
+                                    </div>
+                                    <a href="Profile.html">
+                                        <p class="avatars_name txt_sm">
+                                            @makinzi_jamy... </p>
+                                    </a>
+                                </div>
+                                <a href="#" class="space-x-3">
+                                    <p class="color_green txt_sm">0.001 ETH</p>
+                                </a>
+                            </div>
+                            <div class="hr"></div>
+                            <a href="#" class="d-flex align-items-center
+                                space-x-10">
+                                <i class="ri-vip-crown-line"></i>
+                                <p class="color_text txt_sm" style="width:
+                                    auto;">Highest bid</p>
+                                <span class="color_black txt_sm">0.001 ETH</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+<div class="container">
+    <div class="box in__upload mb-120">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="left__part space-y-40 md:mb-20 upload_file">
+                    <div class="space-y-20">
+                        <img class="icon"
+                            src="assets/img/icons/upload.svg"
+                            alt="">
+                        <h5>Drag and drop your file</h5>
+                        <p class="color_text">PNG, GIF, WEBP, MP4 or MP3. Max
+                            100mb.</p>
+                    </div>
+                    <div class="space-y-20">
+                        <p class="color_text">or choose a file</p>
+                        <a href="#" class="btn btn-white"> Browse files </a>
+                        {# ajout de l'NFT #}
+                        
+                            {{ form_label(form.photo) }}
+                            
+                        
+                            
+        
+                        </div>
+        
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group space-y-10">
+                    <div class="space-y-20">
+                        <div class="space-y-10">
+                            <span class="nameInput">Title</span>
+                            {{form_widget(form.titre, {'attr': {'class': 'form-control'}})}}
+
+                        </div>
+                        <div class="space-y-10">
+                            <span class="nameInput">Description <span
+                                    class="color_text">
+                                    (optional) </span></span>
+                                    {{form_widget(form.description, {'attr': {'class': 'form-control'}})}}
+
+                        </div>
+                        <div class="space-y-10">
+                            <span class="variationInput">Nombre</span>
+                            {{form_widget(form.nombre, {'attr': {'class': 'form-control'}})}}
+
+                        </div>
+                        <div class="space-y-10">
+                            <span class="variationInput">Price</span>
+                            <div class="d-flex flex-column flex-md-row">
+                                {{form_widget(form.prix, {'attr': {'class': 'form-control'}})}}
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                {# <p class="color_black">
+                    <span class="color_text text-bold"> Service fee : </span>
+                    2.5%
+                </p> <p class="color_black">
+                    <span class="color_text text-bold"> You will receive :
+                    </span>
+                    22.425 ETH $41,637.78
+                </p>
+                <p>
+
+
+                </p> #}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="fixed_row bottom-0 left-0 right-0">
+    <div class="container">
+        <div class="row content justify-content-between mb-20_reset">
+            <div class="col-md-auto col-12 mb-20">
+                <div class="space-x-10">
+                    {# <a href="Upload.html" class="btn btn-white
+                        others_btn"> Cancel</a>
+                    <a href="#" class="btn btn-dark others_btn"
+                        data-toggle="modal"
+                        data-target="#popup_preview"> Preview</a> #}
+
+                </div>
+            </div>
+            <div class="col-md-auto col-12 mb-20">
+                <button  type="submit" class="btn btn-grad
+                    btn_create"> Create
+                    item</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{form_rest(form)}}
+    {%for message in app.Flashes('success') %}
+    <div class="alert alert-success" role="alert">
+        {{message}}
+    </div>
+    {%endfor %}
+{{form_end(form)}}
+
+{% endblock %}
+{% block footer %}{% endblock %}
