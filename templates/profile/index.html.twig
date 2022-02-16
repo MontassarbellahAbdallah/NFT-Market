@@ -3,6 +3,43 @@
 
 {% block body %}
 
+{% if user.isVerified == false %}
+<div class="not__found">
+    <div class="container">
+        <div class="row justify-content-center align-items-center pt-100">
+            <div class="col-lg-3 d-none d-lg-block">
+                <img class="img-fluid"
+                    src="assets/img/bg/left-Skull.png" alt="">
+
+            </div>
+            <div class="col-lg-6">
+
+
+                <div class="space-y-30 content">
+                    <div class="space-y-20 d-flex flex-column
+                        justify-content-center align-items-center">
+                        <img src="assets/img/bg/404.png" alt="">
+                        <h2 class="text-center">oups 🥺 ! Page non trouvée</h2>
+                        <p class="text-center">Vous devez confirmer votre adresse de l'email<br/>
+                            Si vous n'avez pas recu l'email n'hésitez pas à nous 
+                        </p>
+                        <div><a href="/contact" class="btn btn-grad">contacter</a></div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-3 d-none d-lg-block">
+                <img class="img-fluid"
+                    src="assets/img/bg/right-Skull.png" alt="">
+
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+{% else %}
 <div class="mb-100">
     <div class="hero__profile">
         <div class="cover">
@@ -595,4 +632,6 @@
         </div>
     </div>
 </div>
+{% endif %}
+
 {% endblock %}

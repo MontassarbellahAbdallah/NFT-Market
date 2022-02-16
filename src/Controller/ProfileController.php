@@ -27,4 +27,6 @@ class ProfileController extends AbstractController
             'nft'=>$nft,
         ]);
     }
+
+  
 }
