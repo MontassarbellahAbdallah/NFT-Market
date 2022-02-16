@@ -46,6 +46,10 @@ class RegistrationController extends AbstractController
             $user->setCouverture('');
             $user->setSolde(0.0);
             $user->setPoints(0);
+            $user->setFacebook("");
+            $user->setTwitter("");
+            $user->setDiscord("");
+            $user->setBio("");
             $entityManager->persist($user);
             $entityManager->flush();
 

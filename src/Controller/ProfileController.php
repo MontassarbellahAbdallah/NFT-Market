@@ -28,5 +28,17 @@ class ProfileController extends AbstractController
         ]);
     }
 
+    #[Route('/profile/settings', name: 'settings')]
+    public function settings(Request $req, ManagerRegistry $doctrine): Response
+    {
+        $user = $this->getUser();
+        
+        return $this->render('profile/settings.html.twig', [
+            'controller_name' => 'ProfileController',
+            'user'=>$user,
+            
+        ]);
+    }
+
   
 }

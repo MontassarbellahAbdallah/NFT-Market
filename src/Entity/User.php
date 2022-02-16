@@ -62,6 +62,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+        /**
+     * @ORM\Column(type="string", length=180)
+     */
+    private $facebook;
+            /**
+     * @ORM\Column(type="string", length=180)
+     */
+    private $twitter;
+    
+                /**
+     * @ORM\Column(type="string", length=180)
+     */
+    private $discord;
+
+                    /**
+     * @ORM\Column(type="string", length=180)
+     */
+    private $bio;
 
     /**
      * @ORM\Column(type="boolean")
@@ -209,6 +227,54 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getFacebook(): ?string
+    {
+        return $this->facebook;
+    }
+
+    public function setFacebook(string $facebook): self
+    {
+        $this->facebook = $facebook;
+
+        return $this;
+    }
+
+    public function getTwitter(): ?string
+    {
+        return $this->twitter;
+    }
+
+    public function setTwitter(string $twitter): self
+    {
+        $this->twitter = $twitter;
+
+        return $this;
+    }
+
+    public function getDiscord(): ?string
+    {
+        return $this->discord;
+    }
+
+    public function setDiscord(string $discord): self
+    {
+        $this->discord = $discord;
+
+        return $this;
+    }
+
+    public function getBio(): ?string
+    {
+        return $this->bio;
+    }
+
+    public function setBio(string $bio): self
+    {
+        $this->bio = $bio;
 
         return $this;
     }

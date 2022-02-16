@@ -1,0 +1,159 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+{#
+<pre>
+    {{ dump(user) }}
+</pre>
+#}
+
+<div class="mb-50">
+    <div class="hero__profile">
+        <div class="tabs">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb default mb-0">
+                    <li class="breadcrumb-item"><a href="index.html">Profile</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Modifier profile</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="cover">
+            <img src="{{asset('assets/img/bg/cover.jpg')}}" alt="cover">
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="mb-50">
+        <h3 class="mb-30">Choisissez votre image de couverture</h3>
+        <div class="row profile-img">
+            <div class="col-6 col-md-2">
+                <div class="box
+			                        in__profile
+			                        d-flex
+			                        justify-content-center
+			                        align-items-center">
+                    <img class="icon" src="{{asset('assets/img/icons/upload-plus.svg')}}" alt="" />
+                    <input type="file" accept="image/png, image/jpeg" />
+                </div>
+            </div>
+            <div class="col-6 col-md-2">
+                <div class="pro_img is_active">
+                    <img src="{{asset('assets/img/bg/cover_active.png')}}" alt="" />
+                </div>
+            </div>
+            <div class="col-6 col-md-2">
+                <div class="pro_img">
+                    <img src="{{asset('assets/img/bg/edit1.png')}}" alt="" />
+                </div>
+            </div>
+            <div class="col-6 col-md-2">
+                <div class="pro_img">
+                    <img src="{{asset('assets/img/bg/edit1.png')}}" alt="" />
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div>
+        <div class="avatars space-x-20 mb-30">
+            <div id="profile-container">
+                <img id="profileImage" src="{{asset('assets/img/avatars/avatar_3.png')}}" alt="Avatar"
+                    class="avatar avatar-lg border-0" />
+            </div>
+            <div class="space-x-10 d-flex">
+                <div id="boxUpload">
+                    <a href="#" class="btn btn-dark">
+                        Choisissez votre image </a>
+                    <input id="imageUpload" type="file" name="profile_photo" placeholder="Photo" required="" capture>
+                </div>
+                {# <a href="#" class="btn btn-white"> Delete </a> #}
+            </div>
+        </div>
+        <div class="box edit_box col-lg-9 space-y-30">
+            <div class="row sm:space-y-20">
+                <div class="col-lg-6 account-info">
+                    <h3 class="mb-20">Informations sur le compte 🍉🍉</h3>
+                    <div class="form-group space-y-10 mb-0">
+                        <div class="space-y-40">
+                            <div class="space-y-10">
+                                <span class="nameInput">Nom de l'utilisateur</span>
+                                <input type="text" class="form-control" value="{{app.user.username}}" />
+                            </div>
+                            <div class="space-y-10">
+                                <span class="nameInput">Solde</span>
+                                <input type="text" class="form-control" value="{{app.user.solde}}" disabled />
+                            </div>
+                            <div class="space-y-10">
+                                <span class="nameInput d-flex
+			                                        justify-content-between">Email
+                                    {# <span class="txt_xs">Your email for
+                                        marketplace notifications</span> #}
+                                </span>
+                                <div class="confirm">
+                                    <input type="text" class="form-control" placeholder="{{app.user.email}}" disabled />
+                                    {# <a href="#" class="confirm-btn btn
+			                                            btn-dark btn-sm">Confirm</a> #}
+                                </div>
+                            </div>
+                            <div class="space-y-10">
+                                <span class="nameInput">Bio</span>
+                                <textarea style="min-height: 110px"
+                                    placeholder="Add your bio">{{app.user.bio}}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 social-media">
+                    <h3 class="mb-20">Vos réseaux sociaux</h3>
+                    <div class="form-group space-y-10">
+                        <div class="space-y-40">
+                            <div class="d-flex flex-column">
+                                <span class="nameInput mb-10">Facebook</span>
+                                <input type="text" class="form-control" placeholder="facebook username"
+                                    value="{{app.user.facebook}}" />
+                                <div class="facebook-btn btn btn-primary mt-20
+			                                        btn-sm">
+                                    <i class="ri-facebook-circle-fill"></i>
+                                    Ajouter votre Facebook
+                                </div>
+
+
+                            </div>
+                            <div class="d-flex flex-column">
+                                <span class="nameInput mb-10">Twitter</span>
+                                <input type="text" class="form-control" placeholder="twitter username"
+                                    value="{{app.user.twitter}}" />
+                                <div class="twitter-btn btn btn-primary mt-20
+			                                        btn-sm">
+                                    <i class="ri-twitter-fill"></i>
+                                    Ajouter votre Twitter
+                                </div>
+
+                            </div>
+                            <div class="d-flex flex-column">
+                                <span class="nameInput mb-10">Discord</span>
+                                <input type="text" class="form-control" placeholder="discord username"
+                                    value="{{app.user.discord}}" />
+                                <div class="discord-btn btn btn-primary mt-20
+			                                        btn-sm">
+                                    <i class="ri-discord-fill"></i>
+                                    Ajouter votre Discord
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    {# <a class="btn btn-white mt-20
+			                            btn-sm" href="#" data-toggle="modal" data-target="#popup_social_media">
+                        <i class="ri-add-circle-line color_brand"></i>
+                        Add more Social media
+                    </a> #}
+                </div>
+            </div>
+            <div class="hr"></div>
+            <p class="color_black">Pour mettre à jour vos paramètres, cliquez sur 'Mettre à jour le profil'.</p>
+            <div><button type="submit" href="#" class="btn btn-grad">Mettre à jour le profil</button></div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
