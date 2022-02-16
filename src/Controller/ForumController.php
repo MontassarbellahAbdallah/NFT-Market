@@ -26,6 +26,7 @@ class ForumController extends AbstractController
            $em->persist($forum);
            $em->flush();
            $this->addFlash('success', 'Your Forum has been added. Thank you!');
+           return $this->redirectToRoute('forum');
         }
         $forums=$doctrine->getRepository(Forum::class)->findAll();
         return $this->render('forum/index.html.twig', [

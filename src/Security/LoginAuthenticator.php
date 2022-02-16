@@ -50,7 +50,7 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
         }
 
         // For example:
-        return new RedirectResponse($this->urlGenerator->generate('acceuil'));
+        return new RedirectResponse($this->urlGenerator->generate('profile'));
         throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
