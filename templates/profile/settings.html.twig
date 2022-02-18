@@ -1,11 +1,5 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-{#
-<pre>
-    {{ dump(user) }}
-</pre>
-#}
-
 <div class="mb-50">
     <div class="hero__profile">
         <div class="tabs">
@@ -21,6 +15,8 @@
         </div>
     </div>
 </div>
+
+{{form_start(form)}}
 <div class="container">
     <div class="mb-50">
         <h3 class="mb-30">Choisissez votre image de couverture</h3>
@@ -32,7 +28,7 @@
 			                        justify-content-center
 			                        align-items-center">
                     <img class="icon" src="{{asset('assets/img/icons/upload-plus.svg')}}" alt="" />
-                    <input type="file" accept="image/png, image/jpeg" />
+                    {{form_widget(form.couverture)}}
                 </div>
             </div>
             <div class="col-6 col-md-2">
@@ -60,12 +56,22 @@
                     class="avatar avatar-lg border-0" />
             </div>
             <div class="space-x-10 d-flex">
-                <div id="boxUpload">
-                    <a href="#" class="btn btn-dark">
-                        Choisissez votre image </a>
-                    <input id="imageUpload" type="file" name="profile_photo" placeholder="Photo" required="" capture>
-                </div>
+                {# <div id="boxUpload"> #}
+                    {# <a href="#" class="btn btn-dark">
+                        Choisissez votre image </a> #}
+
+                    {# {{form_widget(form.photo)}}
+
+                </div> #}
                 {# <a href="#" class="btn btn-white"> Delete </a> #}
+                <div class="box
+			                        in__profile
+			                        d-flex
+			                        justify-content-center
+			                        align-items-center">
+                    Choisissez votre image
+                    {{form_widget(form.photo)}}
+                </div>
             </div>
         </div>
         <div class="box edit_box col-lg-9 space-y-30">
@@ -76,28 +82,34 @@
                         <div class="space-y-40">
                             <div class="space-y-10">
                                 <span class="nameInput">Nom de l'utilisateur</span>
-                                <input type="text" class="form-control" value="{{app.user.username}}" />
+                                {{form_widget(form.username, {'attr': {'class': 'form-control'}})}}
                             </div>
                             <div class="space-y-10">
                                 <span class="nameInput">Solde</span>
-                                <input type="text" class="form-control" value="{{app.user.solde}}" disabled />
+                                <input type="text" class="form-control" placeholder="{{app.user.solde}}" disabled
+                                    name="solde" />
                             </div>
                             <div class="space-y-10">
                                 <span class="nameInput d-flex
 			                                        justify-content-between">Email
-                                    {# <span class="txt_xs">Your email for
-                                        marketplace notifications</span> #}
+                                   
                                 </span>
                                 <div class="confirm">
-                                    <input type="text" class="form-control" placeholder="{{app.user.email}}" disabled />
+                                    <input type="text" class="form-control" name="email"
+                                        placeholder="{{app.user.email}}" disabled />
                                     {# <a href="#" class="confirm-btn btn
 			                                            btn-dark btn-sm">Confirm</a> #}
                                 </div>
                             </div>
                             <div class="space-y-10">
+                                <span class="nameInput">Mot de passe</span>
+                                {{form_widget(form.password, {'attr': {'class': 'form-control'}})}}
+
+                            </div>
+                            <div class="space-y-10">
                                 <span class="nameInput">Bio</span>
-                                <textarea style="min-height: 110px"
-                                    placeholder="Add your bio">{{app.user.bio}}</textarea>
+                                {{form_widget(form.bio, {'attr': {'class': 'form-control'}})}}
+
                             </div>
                         </div>
                     </div>
@@ -108,8 +120,8 @@
                         <div class="space-y-40">
                             <div class="d-flex flex-column">
                                 <span class="nameInput mb-10">Facebook</span>
-                                <input type="text" class="form-control" placeholder="facebook username"
-                                    value="{{app.user.facebook}}" />
+                                {{form_widget(form.facebook, {'attr': {'class': 'form-control'}})}}
+
                                 <div class="facebook-btn btn btn-primary mt-20
 			                                        btn-sm">
                                     <i class="ri-facebook-circle-fill"></i>
@@ -120,8 +132,8 @@
                             </div>
                             <div class="d-flex flex-column">
                                 <span class="nameInput mb-10">Twitter</span>
-                                <input type="text" class="form-control" placeholder="twitter username"
-                                    value="{{app.user.twitter}}" />
+                                {{form_widget(form.twitter, {'attr': {'class': 'form-control'}})}}
+
                                 <div class="twitter-btn btn btn-primary mt-20
 			                                        btn-sm">
                                     <i class="ri-twitter-fill"></i>
@@ -131,8 +143,8 @@
                             </div>
                             <div class="d-flex flex-column">
                                 <span class="nameInput mb-10">Discord</span>
-                                <input type="text" class="form-control" placeholder="discord username"
-                                    value="{{app.user.discord}}" />
+                                {{form_widget(form.discord, {'attr': {'class': 'form-control'}})}}
+
                                 <div class="discord-btn btn btn-primary mt-20
 			                                        btn-sm">
                                     <i class="ri-discord-fill"></i>
@@ -148,12 +160,20 @@
                         Add more Social media
                     </a> #}
                 </div>
+
             </div>
             <div class="hr"></div>
             <p class="color_black">Pour mettre à jour vos paramètres, cliquez sur 'Mettre à jour le profil'.</p>
-            <div><button type="submit" href="#" class="btn btn-grad">Mettre à jour le profil</button></div>
+            <div><button type="submit" href="#" class="btn btn-grad">Mettre à jour le profil</button></div><br />
+            {{form_rest(form)}}
+            {%for message in app.Flashes('success') %}
+            <div class="alert alert-success" role="alert">
+                {{message}}
+            </div>
+            {%endfor %}
         </div>
     </div>
 </div>
 </div>
+{{form_end(form)}}
 {% endblock %}
