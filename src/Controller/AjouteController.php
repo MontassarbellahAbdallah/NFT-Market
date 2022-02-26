@@ -33,23 +33,25 @@ class AjouteController extends AbstractController
         $form->handleRequest($req);
         $user = $this->getUser()->getEmail();
         $nft->setEmail($user);
-        $dir =  $this->getParameter('photos');
+        $dir =  $this->getParameter('nfts');
         if ($form->isSubmitted() && $form->isValid()) {  
             $image = $form->get('photo')->getData();
             if ($image) {
-               
-                $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $image->guessExtension();
+                // $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                // $safeFilename = $slugger->slug($originalFilename);
+                $newFilename =  uniqid() . '.' . $image->guessExtension();
                 // ajouetr la nouvelle image : Move the file to the directory where images are stored
-                try {
-                    $image->move(
-                        $dir,
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
-                }
+               // ajouetr la nouvelle image : Move the file to the directory where images are stored
+               try {
+                $image->move(
+                    $dir,
+                    $newFilename
+                );
+            } catch (FileException $e) {
+                // ... handle exception if something happens during file upload
+            }
+            $nft->setPhoto($newFilename);
+
             } 
             $em->persist($nft);
             $em->flush();

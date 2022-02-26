@@ -33,4 +33,19 @@ class SecurityController extends AbstractController
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
+
+
+    /**
+     * @Route("/login/wallet", name="login_wallet")
+     */    
+    public function registerWallet(AuthenticationUtils $authenticationUtils): Response
+    {
+        $error = $authenticationUtils->getLastAuthenticationError();
+        $lastUsername = $authenticationUtils->getLastUsername();
+     
+        return $this->render('security/loginWallet.html.twig', ['last_username' => $lastUsername, 'error' => $error,
+        'user'=>$lastUsername
+
+    ]);
+    }
 }

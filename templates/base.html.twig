@@ -266,15 +266,33 @@
                         </button>
                     </div> -->
                     <div class="header__btns">
-                        <a class="btn btn-grad btn-sm" href="Connect-wallet.html">
+                        {% if app.user %}
+                        <a class="btn btn-grad btn-sm" >
+                            <i class="ri-wallet-3-line"></i>
+                            {{app.user.username}}</a>
+                            <a href="/profile">
+                                {% if app.user.photo %}
+                                <img width="45" src="{{asset('uploads/user_photos/'~ app.user.photo)}}" alt="" style="opacity:90%" alt="Avatar">
+                                {% else %}
+                                <img width="45" src="{{asset('assets/img/icons/user.png')}}" alt="" style="opacity:90%">
+                                {% endif %}
+                            </a>
+                      
+                        {% else %}
+                        <a class="btn btn-grad btn-sm" href="/login/wallet">
                             <i class="ri-wallet-3-line"></i>
                             Connecter le portefeuille</a>
                         <!-- <a href="#" id="connectbtn">
-                            <img width="45" src="assets/img/icons/metamask.svg" alt="">
+                            <img width="45" src="assets/img/icons/metamask.svg" alt=""> 
+                        
                         </a> -->
                         <a href="/profile">
+                           
                             <img width="45" src="{{asset('assets/img/icons/user.png')}}" alt="" style="opacity:90%">
+                        
                         </a>
+                        {% endif %}
+                        
                     </div>
                     <div class="header__burger js-header-burger"></div>
 
@@ -356,7 +374,7 @@
                         </li>
                         <li> <a href="/login">login</a>
                         </li>
-                        <li> <a href="register">register
+                        <li> <a href="/register">register
                             </a> </li>
                     </ul>
                 </div>

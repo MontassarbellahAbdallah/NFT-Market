@@ -25,4 +25,24 @@ class AcceuilController extends AbstractController
             'nfts'=>$nfts,
         ]);
     }
+    // Item-details
+    #[Route('/item-details/{id}', name: 'item-details')]
+    public function itemDetails(Request $req,NFT $nft, ManagerRegistry $doctrine): Response
+    {
+       $email = $nft->getEmail();
+       $users =$doctrine->getRepository(User::class)->findByEmail($email); 
+       $prix_eth = $nft->getPrix();
+       $prix = $prix_eth * 2446 ;
+       
+       
+    
+        return $this->render('acceuil/item-details.html.twig', [
+            'controller_name' => 'AcceuilController',
+            'nft'=>$nft,
+            'email'=>$email,
+            'user'=>$users,
+            'prix'=>$prix,
+            
+        ]);
+    }
 }

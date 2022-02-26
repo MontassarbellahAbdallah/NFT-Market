@@ -37,7 +37,7 @@ class ProfileController extends AbstractController
     #[Route('/profile/settings', name: 'settings')]
     public function settings(Request $req, ManagerRegistry $doctrine, UserPasswordHasherInterface $userPasswordHasher,EntityManagerInterface $entityManager): Response
     {
-        $em = $doctrine->getManager();
+        // $em = $doctrine->getManager();
         $user = $this->getUser();
         $form = $this->createForm(ModifierType::class, $user, [
             'action' => $this->generateUrl('settings'),
@@ -51,6 +51,8 @@ class ProfileController extends AbstractController
             $facebook = $form->get('facebook')->getData();
             $twitter = $form->get('twitter')->getData();
             $discord = $form->get('discord')->getData();
+            $image = $form->get('photo')->getData();
+            $couverture = $form->get('couverture')->getData();
 
             if($pasword != $user->getPassword()){
                 $user->setPassword(
@@ -62,6 +64,58 @@ class ProfileController extends AbstractController
                 
 
             }
+            $dir =  $this->getParameter('photos');
+            if ($image) {
+                //$originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                //$safeFilename = $slugger->slug($originalFilename);
+                $newFilename =  uniqid() . '.' . $image->guessExtension();
+                //supprimer l'ancienne image de l'user du serveur si elle existe
+                if($user->getPhoto()){
+                    try{
+                        unlink($dir . '/' . $user->getPhoto());
+                    }catch (\Exception $e){
+                    }
+                }
+                // ajouetr la nouvelle image : Move the file to the directory where images are stored
+                try {
+                    $image->move(
+                        $dir,
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+                $user->setPhoto($newFilename);
+            }
+
+            $dir1 =  $this->getParameter('couverture');
+
+
+              if ($couverture) {
+           
+                  $newFilenameCov =  uniqid() . '.' . $couverture->guessExtension();
+            // //     //supprimer l'ancienne image de l'user du serveur si elle existe
+                 if($user->getCouverture()){
+                    try{
+                        unlink($dir . '/' . $user->getCouverture());
+                    }
+            catch (\Exception $e){
+                     }
+                 }
+            // //     // ajouetr la nouvelle image : Move the file to the directory where images are stored
+                try {
+                    $couverture->move(
+                        $dir1,
+                         $newFilenameCov
+                    );
+                 } catch (FileException $e) {
+                    
+                 }
+                  $user->setCouverture($newFilenameCov);
+             }
+
+
+
             $user->setBio($bio);
             $user->setUsername($username);
             $user->setFacebook($facebook);

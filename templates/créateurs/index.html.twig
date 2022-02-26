@@ -32,9 +32,16 @@
             <div class="creator_item creator_card space-y-10 is_big">
                 <div class="avatars flex-column space-y-10">
                     <div class="media has_border">
+                        {% if user.photo %}
+                        <a href="Profile.html">
+                            <img src="{{asset('uploads/user_photos/' ~ user.photo)}}" alt="Avatar" class="avatar avatar-md">
+                        </a>
+                        {% else %}
                         <a href="Profile.html">
                             <img src="assets/img/avatars/avatar_1.png" alt="Avatar" class="avatar avatar-md">
-                        </a>
+                        </a>    
+                        {% endif %}
+                        
                        
                     </div>
                     <div class="text-center">
