@@ -1,0 +1,147 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<section class="section forum post__details mt-100">
+    <div class="container-md">
+        <div class="row sm:space-y-30">
+            <div class="col-lg-12">
+                <div class="forum__content space-y-30">
+                    <div class="box is__big space-y-20 forum_border">
+                        <div class="d-flex justify-content-between
+                            align-items-center">
+                            <div class="d-flex align-items-center space-x-15">
+                                <div class="avatars space-x-10">
+                                    <div class="media has_border">
+                                        <a href="Profile.html">
+                                            <img
+                                                src="{{asset('assets/img/avatars/avatar_1.png')}}"
+                                                alt="Avatar"
+                                                class="avatar avatar-forum">
+                                        </a>
+                                    </div>
+                                    <div class="text-center">
+                                        <a>
+                                            <p class="avatars_name color_brand">{{ forum.email }}</p>
+                                        </a>
+                                    </div>
+                                </div>
+                             
+                            </div>
+                            <div>
+                                
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            
+                            <div class="space-y-20">
+                                <h3>{{forum.titre}}</h3>
+                                <p class="forum__desc">{{forum.message}}</p>
+                                <div class="tags">
+                                    <span># {{forum.categorie}}</span>
+                                    
+                                </div>
+                                {# <div class="hr"></div>
+                                <div class="d-flex justify-content-between
+                                    flex-wrap">
+                                    <div class="reaction">
+                                        <a href="#" class="likes space-x-3">
+                                            <i class="ri-heart-3-fill"></i>
+                                            <span class="txt_sm">2.1k</span>
+                                        </a>
+                                        <a href="#" class="comments space-x-3">
+                                            <i class="ri-chat-1-line"></i>
+                                            <span class="txt_sm">257 Comments</span>
+                                        </a>
+                                        <span class="views space-x-3">
+                                            <i class="ri-eye-line"></i>
+                                            <span>257 Views</span>
+                                        </span>
+                                        <span class="time space-x-3">
+                                            <i class="ri-time-line"></i>
+                                            <span>8 days ago</span>
+                                        </span>
+                                    </div>
+                                    <div class="answer">
+                                        <a href="#" class="btn btn-dark btn-sm">Answer</a>
+                                    </div>
+                                </div> #}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box comments__box">
+                        <div class="avatars">
+                            <div class="media has_border">
+                                <a >
+                                    {% if app.user.photo %}
+                                    <img src="{{asset('uploads/user_photos/' ~ app.user.photo)}}"
+                                    alt="Avatar"
+                                    class="avatar avatar-forum"> 
+                                    {% else %}
+                                    <img src="{{asset('assets/img/avatars/avatar_3.png')}}"
+                                        alt="Avatar"
+                                        class="avatar avatar-forum">
+                                    {% endif %}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="inupt__comment">
+                        {{form_start(form)}}
+                            
+                                {{form_widget(form.answer, {'attr': {'class': 'form-control'}})}}
+                        
+                        </div>
+                        <div class="answer">
+                            <button type="submit" class="btn btn-primary btn-sm">Reponse</button>
+                        </div>
+                    </div>
+                        {{form_rest(form)}}
+                        {{form_end(form)}}
+                    
+                    <div class="Answers space-x-5">
+                        <i class="ri-question-answer-line"></i>
+                        <h5>Answers</h5>
+                    </div>
+                    <div class="box answers__box is__big space-y-20">
+                        {% for answer in answers %}
+                        <div>
+                            <div class="d-flex align-items-center space-x-15">
+                                <div class="avatars space-x-10">
+                                    <div class="media has_border">
+                                        <a href="Profile.html">
+                                            <img
+                                                src="assets/img/avatars/avatar_2.png"
+                                                alt="Avatar"
+                                                class="avatar avatar-forum">
+                                        </a>
+                                    </div>
+                                    <div class="text-center">
+                                        <a href="Profile.html">
+                                            <p class="avatars_name color_brand">{{answer.email}}</p>
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="d-flex">
+                                <div class="v__line">
+                                </div>
+                                <div class="space-y-20">
+                                    <p class="forum__desc">{{answer.answer}}
+                                    </p>
+                                   
+                                    <div class="hr"></div>
+                                </div>
+                            </div>
+                        </div>  
+                        {% endfor %}
+                        
+                        
+                    </div>
+                </div>
+ 
+            </div>
+           
+        </div>
+    </div>
+ </section>
+ 
+{% endblock %}

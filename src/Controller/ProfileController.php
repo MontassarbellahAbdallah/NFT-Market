@@ -136,5 +136,16 @@ class ProfileController extends AbstractController
         ]);
     }
 
-  
+    #[Route('/view/{id}', name: 'profile_view')]
+    public function ViewUser(Request $req, ManagerRegistry $doctrine,User $user): Response
+    {
+        
+        $email = $user->getEmail();
+        $nft =$doctrine->getRepository(NFT::class)->findByEmail($email);
+        return $this->render('profile/ViewProfil.html.twig', [
+            'controller_name' => 'ProfileController',
+            'user'=>$user,
+            'nft'=>$nft,
+        ]);
+    }
 }

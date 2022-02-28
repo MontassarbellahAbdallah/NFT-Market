@@ -33,11 +33,11 @@
                 <div class="avatars flex-column space-y-10">
                     <div class="media has_border">
                         {% if user.photo %}
-                        <a href="Profile.html">
+                        <a href="{{path('profile_view',{'id':user.id})}}">
                             <img src="{{asset('uploads/user_photos/' ~ user.photo)}}" alt="Avatar" class="avatar avatar-md">
                         </a>
                         {% else %}
-                        <a href="Profile.html">
+                        <a href="{{path('profile_view',{'id':user.id})}}">
                             <img src="assets/img/avatars/avatar_1.png" alt="Avatar" class="avatar avatar-md">
                         </a>    
                         {% endif %}
@@ -45,7 +45,7 @@
                        
                     </div>
                     <div class="text-center">
-                        <a >
+                        <a href="{{path('profile_view',{'id':user.id})}}">
                             <p class="avatars_name large color_black"><i class="ri-user-3-line"></i>  {{user.username}}</p>
                         </a>
                         <span class="sales color_text">{{user.points}}  <i class="ri-money-dollar-circle-line"></i></span>

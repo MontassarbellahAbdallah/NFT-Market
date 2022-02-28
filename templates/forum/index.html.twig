@@ -77,13 +77,13 @@
                         space-x-15">
                         <div class="avatars space-x-10">
                             <div class="media has_border">
-                                <a href="Profile.html">
+                                <a >
                                     <img src="assets/img/avatars/avatar_3.png" alt="Avatar" class="avatar
                                         avatar-forum">
                                 </a>
                             </div>
                             <div class="text-center">
-                                <a href="Profile.html">
+                                <a>
                                     <p class="avatars_name
                                         color_brand">{{ forum.email }}</p>
                                 </a>
@@ -128,7 +128,7 @@
                         <span>42</span>
                     </div> #}
                     <div class="space-y-20">
-                        <a href="post_details.html">
+                        <a href="{{path('froum_detail',{'id':forum.id})}}">
                             <h3 class="forum__title">{{ forum.titre }}</h3>
                         </a>
                         <p class="forum__desc">{{ forum.message }}</p>
@@ -161,7 +161,7 @@
                                 </span>
                             </div> #}
                             <div class="answer">
-                                <a href="#" class="btn btn-dark
+                                <a href="{{path('froum_detail',{'id':forum.id})}}" class="btn btn-dark
                                     btn-sm">Answer</a>
                             </div>
                         </div>

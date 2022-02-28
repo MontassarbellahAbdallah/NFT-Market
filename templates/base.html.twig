@@ -273,6 +273,7 @@
                             <a href="/profile">
                                 {% if app.user.photo %}
                                 <img width="45" src="{{asset('uploads/user_photos/'~ app.user.photo)}}" alt="" style="opacity:90%" alt="Avatar">
+                                
                                 {% else %}
                                 <img width="45" src="{{asset('assets/img/icons/user.png')}}" alt="" style="opacity:90%">
                                 {% endif %}
