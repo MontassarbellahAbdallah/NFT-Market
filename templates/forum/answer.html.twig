@@ -71,15 +71,11 @@
                         <div class="avatars">
                             <div class="media has_border">
                                 <a >
-                                    {% if app.user.photo %}
-                                    <img src="{{asset('uploads/user_photos/' ~ app.user.photo)}}"
-                                    alt="Avatar"
-                                    class="avatar avatar-forum"> 
-                                    {% else %}
+                                    
                                     <img src="{{asset('assets/img/avatars/avatar_3.png')}}"
                                         alt="Avatar"
                                         class="avatar avatar-forum">
-                                    {% endif %}
+                                    
                                 </a>
                             </div>
                         </div>
@@ -108,7 +104,7 @@
                                     <div class="media has_border">
                                         <a href="Profile.html">
                                             <img
-                                                src="assets/img/avatars/avatar_2.png"
+                                                src="{{asset('assets/img/avatars/avatar_2.png')}}"
                                                 alt="Avatar"
                                                 class="avatar avatar-forum">
                                         </a>

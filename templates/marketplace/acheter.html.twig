@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% for nft in nft %}
+{{form_start(form)}}
+<div>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body space-y-20 p-40">
+                <h3>Vérifier l'achat
+                </h3>
+                <p>Vous êtes sur le point d'acheter un <span class="color_black">{{nft.titre}}</span> de
+                    <span class="color_black">{{nft.email}}</span>
+                </p>
+
+                <div class="space-y-10">
+                    <p>Entrez la quantité. <span class="color_green">{{nft.nombre}} diponible</span>
+                    </p>
+                    {{form_widget(form.qte, {'attr': {'class': 'form-control'}})}}
+                </div>
+
+                <div class="hr"></div>
+                <div class="d-flex justify-content-between">
+                    <p> Vous devez payerr :</p>
+                    <p class="text-right color_black txt _bold" id="prix"> {{nft.prix}} pts</p>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <p> frais de service :</p>
+                    <p class="text-right color_black txt _bold" id="frais"> {{frais}} pts</p>
+                </div>
+                {# <div class="d-flex justify-content-between">
+                    <p> Total a payer :</p>
+                    <p class="text-right color_black txt _bold" id="total"> nft.prix*nombre + frais </p>
+                </div> #}
+
+                <button type="submit" class="btn btn-primary
+                w-full" aria-label="Close">
+                    Acheter</button>
+            </div>
+        </div>
+    </div>
+    {{form_rest(form)}}
+    {%for message in app.Flashes('success') %}
+    <div class="alert alert-success" role="alert">
+        {{message}}
+    </div>
+    {%endfor %}
+
+    {{form_end(form)}}
+</div>
+{% endfor %}
+{% endblock %}

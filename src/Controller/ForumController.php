@@ -15,22 +15,22 @@ use App\Form\AnswerType;
 class ForumController extends AbstractController
 {
     #[Route('/forum', name: 'forum')]
-    public function index(Request $req , ManagerRegistry $doctrine): Response
+    public function index(Request $req, ManagerRegistry $doctrine): Response
     {
         $em = $doctrine->getManager();
         $forum = new Forum();
-        $form= $this->createForm(ForumType::class, $forum, [
+        $form = $this->createForm(ForumType::class, $forum, [
             'action' => $this->generateUrl('forum'),
             'method' => 'POST',
         ]);
         $form->handleRequest($req);
-        if($form->isSubmitted() && $form->isValid()){
-           $em->persist($forum);
-           $em->flush();
-           $this->addFlash('success', 'Your Forum has been added. Thank you!');
-           return $this->redirectToRoute('forum');
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($forum);
+            $em->flush();
+            $this->addFlash('success', 'Your Forum has been added. Thank you!');
+            return $this->redirectToRoute('forum');
         }
-        $forums=$doctrine->getRepository(Forum::class)->findAll();
+        $forums = $doctrine->getRepository(Forum::class)->findAll();
         return $this->render('forum/index.html.twig', [
             'controller_name' => 'ForumController',
             'form' => $form->createView(),
@@ -39,33 +39,32 @@ class ForumController extends AbstractController
     }
 
     #[Route('/forum/detail/{id}', name: 'froum_detail')]
-    public function Answer(Request $req, ManagerRegistry $doctrine,Forum $forum): Response
+    public function Answer(Request $req, ManagerRegistry $doctrine, Forum $forum): Response
     {
 
-        $email = $this->getUser()->getEmail();
-         $id_forum = $forum->getId();
-          $em = $doctrine->getManager();
-          $answer = new Answer();
-          $formAns= $this->createForm(AnswerType::class, $answer, [
-            'action' => $this->generateUrl('froum_detail',['id' => $id_forum]),
+        $id_forum = $forum->getId();
+        $em = $doctrine->getManager();
+        $answer = new Answer();
+        $formAns = $this->createForm(AnswerType::class, $answer, [
+            'action' => $this->generateUrl('froum_detail', ['id' => $id_forum]),
             'method' => 'POST',
-          ]);
-         $formAns->handleRequest($req);
-        if($formAns->isSubmitted() && $formAns->isValid()){
-            
-             $answer->setForum($id_forum);
-             $answer->setEmail($email);
+        ]);
+        $formAns->handleRequest($req);
+        if ($formAns->isSubmitted() && $formAns->isValid()) {
+            $email = $this->getUser()->getEmail();
+            $answer->setForum($id_forum);
+            $answer->setEmail($email);
             $em->persist($answer);
             $em->flush();
-            return $this->redirectToRoute('froum_detail',['id' => $id_forum]);
-         }
-        $answers=$doctrine->getRepository(Answer::class)->findByForum($id_forum);
+            return $this->redirectToRoute('froum_detail', ['id' => $id_forum]);
+        }
+        $answers = $doctrine->getRepository(Answer::class)->findByForum($id_forum);
         return $this->render('forum/answer.html.twig', [
             'controller_name' => 'ForumController',
-            'answers'=>$answers,
-            'forum'=>$forum,
-             'form' => $formAns->createView(),
-            
+            'answers' => $answers,
+            'forum' => $forum,
+            'form' => $formAns->createView(),
+
         ]);
     }
 }

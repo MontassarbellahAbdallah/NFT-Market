@@ -214,18 +214,16 @@
         </div> #}
         <div class="row mb-30_reset">
             {% for nft in nfts %}
-
-
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                 <div class="card__item four">
                     <div class="card_body space-y-10">
                         <!-- =============== -->
                         <div class="creators space-x-10">
                             <div class="avatars space-x-3">
-                                <a href="Profile.html">
+                                <a >
                                     <img src="assets/img/avatars/avatar_1.png" alt="Avatar" class="avatar avatar-sm">
                                 </a>
-                                <a href="Profile.html">
+                                <a >
                                     <p class="avatars_name txt_xs">{{nft.email}}</p>
                                 </a>
                             </div>
@@ -239,8 +237,8 @@
                             </div> #}
                         </div>
                         <div class="card_head">
-                            <a href="Item-details.html">
-                                <img src="assets/img/items/item_1.png" alt="">
+                            <a href="{{path('item-details',{'id':nft.id})}}">
+                                <img src="{{asset('uploads/nfts/'~ nft.photo)}}" alt="">
                             </a>
 
                             {# <a href="#" class="likes space-x-3">
@@ -274,8 +272,7 @@
                                             History</p>
                                     </a> #}
                                 </div>
-                                <a class="btn btn-sm btn-primary" href="#" data-toggle="modal"
-                                    data-target="#popup_bid">Consulter</a>
+                                <a class="btn btn-sm btn-primary" href="{{path('item-details',{'id':nft.id})}}" >Consulter</a>
                             </div>
                         </div>
                     </div>
