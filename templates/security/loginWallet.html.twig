@@ -117,6 +117,7 @@
                         </div>
 
                         <script>
+                            var url = "{{ path('login_wallet') }}";
                             const serverUrl = "https://ki2itix6o4jh.usemoralis.com:2053/server";
                             const appId = "VL3LDJQmTElRkfJBW4NPZouBqdW4izurS9g7FHK6";
                             Moralis.start({ serverUrl, appId })
@@ -124,7 +125,7 @@
                             async function login_metaMask() {
                                 const user = await Moralis.authenticate();
                                 console.log(user);
-
+                                $.post(url, {'data':user});
                             }
 
                             async function login_coinbase() {

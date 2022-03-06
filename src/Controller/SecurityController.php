@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -38,8 +39,10 @@ class SecurityController extends AbstractController
     /**
      * @Route("/login/wallet", name="login_wallet")
      */    
-    public function registerWallet(AuthenticationUtils $authenticationUtils): Response
+    public function registerWallet(Request $request, AuthenticationUtils $authenticationUtils): Response
     {
+        $user = $request->get('data');
+        $id = key_exists('id', $user)?$user['id']:null;
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
      
