@@ -1,158 +1,189 @@
 {% extends 'base.html.twig' %}
+{% block javascripts %}
 
+    <script>
+        var url = "{{ path('login_wallet') }}";
+        const serverUrl = "https://ki2itix6o4jh.usemoralis.com:2053/server";
+        const appId = "VL3LDJQmTElRkfJBW4NPZouBqdW4izurS9g7FHK6";
+        Moralis.start({serverUrl, appId})
+
+        /* Authentication code */
+        async function login_metaMask() {
+
+            const user = await Moralis.authenticate();
+            console.log(user['id']);
+            //$.post(url, {'data': user});
+            $('#id_wallet').val(user['id']);
+            $('#form_inscription').removeAttr('hidden');
+        }
+
+        async function login_coinbase() {
+            // Use eth_RequestAccounts
+            console.log('user')
+        }
+
+        async function login_wallet_connect() {
+            //const user = await Moralis.authenticate({ provider: "walletconnect" });
+            const user = await Moralis.authenticate({
+                provider: "walletconnect",
+                mobileLinks: [
+                    "rainbow",
+                    "metamask",
+                    "argent",
+                    "trust",
+                    "imtoken",
+                    "pillar",
+                ]
+            })
+            console.log(user);
+        }
+    </script>
+
+{% endblock %}
 
 {% block body %}
-<pre>
+    <pre>
     {{ dump(user) }}
 </pre>
-<div class="effect">
-    <div class="container">
-        <a href="/" class="btn btn-white btn-sm mt-20">
-            Back to home</a>
-        <div class="hero__wallets pt-100 pb-50">
-            <div class="space-y-20 d-flex flex-column align-items-center">
-                <div class="logo">
-                    <img src="{{asset('assets/img/icons/logo.svg')}}" alt="">
+    <div class="effect">
+        <div class="container">
+            <a href="/" class="btn btn-white btn-sm mt-20">
+                Back to home</a>
+            <div class="hero__wallets pt-100 pb-50">
+                <div class="space-y-20 d-flex flex-column align-items-center">
+                    <div class="logo">
+                        <img src="{{ asset('assets/img/icons/logo.svg') }}" alt="">
+                    </div>
+                    <h2 class="text-center">Connect your wallet</h2>
+                    <p class="text-center">Connect with one of available wallet
+                        providers or create a new wallet.
+                    </p>
                 </div>
-                <h2 class="text-center">Connect your wallet</h2>
-                <p class="text-center">Connect with one of available wallet
-                    providers or create a new wallet.
-                </p>
             </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-lg-9">
-                <div class="wallets">
-                    <div class="row mb-20_reset">
-                        <!-- ================= item -->
-                        <div class="col-lg-4">
-                            <a type="submit" onclick="login_coinbase()" class="box in__wallet space-y-10">
-                                <div class="logo">
-                                    <img src="{{asset('assets/img/icons/coibase.svg')}}" alt="logo_community">
-                                </div>
-                                <h5 class="text-center">coinbase</h5>
-                                <p class="text-center">Connecter avec Coinbase</p>
+            <div class="row justify-content-center">
+                <div class="col-lg-9">
+                    <div class="wallets">
+                        <div class="row mb-20_reset">
+                            <!-- ================= item -->
+                            <div class="col-lg-4">
+                                <a type="submit" onclick="login_coinbase()" class="box in__wallet space-y-10">
+                                    <div class="logo">
+                                        <img src="{{ asset('assets/img/icons/coibase.svg') }}" alt="logo_community">
+                                    </div>
+                                    <h5 class="text-center">coinbase</h5>
+                                    <p class="text-center">Connecter avec Coinbase</p>
 
-                            </a>
-                        </div>
+                                </a>
+                            </div>
 
-                        <!-- ================= item -->
-                        <div class="col-lg-4">
+                            <!-- ================= item -->
+                            <div class="col-lg-4">
 
-                            <!-- data-toggle="modal"
-											data-target="#popup_error" -->
-                            <a onclick="login_metaMask()" class="box in__wallet space-y-10">
-                                <div class="logo">
-                                    <img src="{{asset('assets/img/icons/metamask.svg')}}" alt="logo_community">
-                                </div>
-                                <h5 class="text-center">metamask</h5>
-                                <p class="text-center">Connecter avec Metamask</p>
+                                <!-- data-toggle="modal"
+                                                data-target="#popup_error" -->
+                                <a onclick="login_metaMask()" class="box in__wallet space-y-10" style=" cursor: pointer;">
+                                    <div class="logo">
+                                        <img src="{{ asset('assets/img/icons/metamask.svg') }}" alt="logo_community">
+                                    </div>
+                                    <h5 class="text-center">metamask</h5>
+                                    <p class="text-center">Connecter avec Metamask</p><br>
 
-                            </a>
+                                </a>
 
-                        </div>
 
-                        {#
-                        <script>
-                            window.userWalletAddress = null
-                            const loginButton = document.getElementById('loginButton')
-                            const userWallet = document.getElementById('userWallet')
+                            </div>
 
-                            function toggleButton() {
-                                if (!window.ethereum) {
-                                    userWallet.innerText = 'MetaMask is not installed'
-                                    // loginButton.classList.remove('bg-purple-500', 'text-white')
-                                    // loginButton.classList.add('bg-gray-500', 'text-gray-100', 'cursor-not-allowed')
-                                    return false
+                            {#
+                            <script>
+                                window.userWalletAddress = null
+                                const loginButton = document.getElementById('loginButton')
+                                const userWallet = document.getElementById('userWallet')
+
+                                function toggleButton() {
+                                    if (!window.ethereum) {
+                                        userWallet.innerText = 'MetaMask is not installed'
+                                        // loginButton.classList.remove('bg-purple-500', 'text-white')
+                                        // loginButton.classList.add('bg-gray-500', 'text-gray-100', 'cursor-not-allowed')
+                                        return false
+                                    }
+
+                                    loginButton.addEventListener('click', loginWithMetaMask)
                                 }
 
-                                loginButton.addEventListener('click', loginWithMetaMask)
-                            }
+                                async function loginWithMetaMask() {
+                                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+                                        .catch((e) => {
+                                            console.error(e.message)
+                                            return
+                                        })
+                                    if (!accounts) { return }
 
-                            async function loginWithMetaMask() {
-                                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
-                                    .catch((e) => {
-                                        console.error(e.message)
-                                        return
-                                    })
-                                if (!accounts) { return }
+                                    window.userWalletAddress = accounts[0]
+                                    userWallet.value = window.userWalletAddress
+                                    // loginButton.innerText = 'Sign out of MetaMask'
 
-                                window.userWalletAddress = accounts[0]
-                                userWallet.value = window.userWalletAddress
-                                // loginButton.innerText = 'Sign out of MetaMask'
+                                    loginButton.removeEventListener('click', loginWithMetaMask)
+                                    setTimeout(() => {
+                                        loginButton.addEventListener('click', signOutOfMetaMask)
+                                    }, 200)
 
-                                loginButton.removeEventListener('click', loginWithMetaMask)
-                                setTimeout(() => {
-                                    loginButton.addEventListener('click', signOutOfMetaMask)
-                                }, 200)
+                                }
 
-                            }
+                                function signOutOfMetaMask() {
+                                    window.userWalletAddress = null
+                                    userWallet.value = "";
+                                    //loginButton.innerText = 'Sign in with MetaMask'
 
-                            function signOutOfMetaMask() {
-                                window.userWalletAddress = null
-                                userWallet.value = "";
-                                //loginButton.innerText = 'Sign in with MetaMask'
+                                    loginButton.removeEventListener('click', signOutOfMetaMask)
+                                    setTimeout(() => {
+                                        loginButton.addEventListener('click', loginWithMetaMask)
+                                    }, 200)
+                                }
 
-                                loginButton.removeEventListener('click', signOutOfMetaMask)
-                                setTimeout(() => {
-                                    loginButton.addEventListener('click', loginWithMetaMask)
-                                }, 200)
-                            }
-
-                            window.addEventListener('DOMContentLoaded', () => {
-                                toggleButton()
-                            });
-                        </script> #}
+                                window.addEventListener('DOMContentLoaded', () => {
+                                    toggleButton()
+                                });
+                            </script> #}
 
 
-                        <!-- ================= item -->
-                        <div class="col-lg-4">
-                            <a  onclick="login_wallet_connect()" class="box in__wallet space-y-10">
-                                <div class="logo">
-                                    <img src="{{asset('assets/img/icons/walletconnect.svg')}}" alt="logo_community">
-                                </div>
-                                <h5 class="text-center">walletconnect</h5>
-                                <p class="text-center">Connecter avec WalletConnect</p>
-                            </a>
+                            <!-- ================= item -->
+                            <div class="col-lg-4">
+                                <a onclick="login_wallet_connect()" class="box in__wallet space-y-10" style=" cursor: pointer;">
+                                    <div class="logo">
+                                        <img src="{{ asset('assets/img/icons/walletconnect.svg') }}"
+                                             alt="logo_community">
+                                    </div>
+                                    <h5 class="text-center">walletconnect</h5>
+                                    <p class="text-center">Connecter avec WalletConnect</p>
+                                </a>
+                            </div>
                         </div>
-
-                        <script>
-                            var url = "{{ path('login_wallet') }}";
-                            const serverUrl = "https://ki2itix6o4jh.usemoralis.com:2053/server";
-                            const appId = "VL3LDJQmTElRkfJBW4NPZouBqdW4izurS9g7FHK6";
-                            Moralis.start({ serverUrl, appId })
-                            /* Authentication code */
-                            async function login_metaMask() {
-                                const user = await Moralis.authenticate();
-                                console.log(user);
-                                $.post(url, {'data':user});
-                            }
-
-                            async function login_coinbase() {
-                                // Use eth_RequestAccounts
-                                console.log('user')
-                            }
-
-                            async function login_wallet_connect(){
-                                //const user = await Moralis.authenticate({ provider: "walletconnect" });
-                                const user = await Moralis.authenticate({ 
-                                    provider: "walletconnect", 
-                                    mobileLinks: [
-                                      "rainbow",
-                                      "metamask",
-                                      "argent",
-                                      "trust",
-                                      "imtoken",
-                                      "pillar",
-                                    ] 
-                                })
-                                console.log(user);
-                            }
-                        </script>
+                        <div id="form_inscription" hidden>
+                            <form action="{{ path('login_wallet') }}" method="post">
+                                <div class="row">
+                                    <div class="col-sm-6 space-y-20">
+                                        <div class="space-y-10">
+                                            <span class="nameInput">Votre adresse e-mail</span>
+                                            <input type="email" id="contact_email" name="email"
+                                                   required="required"
+                                                   placeholder="Email Adress*" class="form-control">
+                                        </div>
+                                        <div class="space-y-10">
+                                            <span class="nameInput">Nom</span>
+                                            <input type="name" id="contact_name" name="name"
+                                                   required="required"
+                                                   placeholder="Full Name*" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <input hidden id="id_wallet" name="wallet" value="">
+                                <input hidden value="{{ csrf_token('my_wallet') }}">
+                                <button type="submit">Submit</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}

@@ -41,8 +41,13 @@ class SecurityController extends AbstractController
      */    
     public function registerWallet(Request $request, AuthenticationUtils $authenticationUtils): Response
     {
-        $user = $request->get('data');
-        $id = key_exists('id', $user)?$user['id']:null;
+        /*$user = $request->get('data');
+        if($user){
+            $id = key_exists('id', $user)?$user['id']:null;
+        }*/
+        dump($request->get('wallet'));
+        dump($request->get('name'));
+        dump($request->get('email'));
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
      
