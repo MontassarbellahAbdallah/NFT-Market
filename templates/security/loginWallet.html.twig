@@ -26,35 +26,33 @@
                     <div class="row mb-20_reset">
                         <!-- ================= item -->
                         <div class="col-lg-4">
-                            <a href="" class="box in__wallet space-y-10" data-toggle="modal"
-                                data-target="#popup_connected">
+                            <a type="submit" onclick="login_coinbase()" class="box in__wallet space-y-10">
                                 <div class="logo">
                                     <img src="{{asset('assets/img/icons/coibase.svg')}}" alt="logo_community">
                                 </div>
-                                <h5 class="text-center">coibase</h5>
-                                <p class="text-center">wallet that works on both mobile and through a browser extension
-                                </p>
+                                <h5 class="text-center">coinbase</h5>
+                                <p class="text-center">Connecter avec Coinbase</p>
+
                             </a>
                         </div>
-                        
+
                         <!-- ================= item -->
                         <div class="col-lg-4">
-                            
+
                             <!-- data-toggle="modal"
 											data-target="#popup_error" -->
-                            <button type="submit" id="loginButton" class="box in__wallet space-y-10" >
+                            <a onclick="login_metaMask()" class="box in__wallet space-y-10">
                                 <div class="logo">
                                     <img src="{{asset('assets/img/icons/metamask.svg')}}" alt="logo_community">
                                 </div>
                                 <h5 class="text-center">metamask</h5>
-                                <input type="text" id="userWallet"  value="" disabled>
-                                <!-- <p>A la premier connexion votre mot de passe de securite est : azerty vous devez le modifier</p>
-                                <button  id="">Connecter a votre metamask</button> -->
-                              
-                                </button>
-                        
+                                <p class="text-center">Connecter avec Metamask</p>
+
+                            </a>
+
                         </div>
 
+                        {#
                         <script>
                             window.userWalletAddress = null
                             const loginButton = document.getElementById('loginButton')
@@ -87,6 +85,7 @@
                                 setTimeout(() => {
                                     loginButton.addEventListener('click', signOutOfMetaMask)
                                 }, 200)
+
                             }
 
                             function signOutOfMetaMask() {
@@ -103,54 +102,52 @@
                             window.addEventListener('DOMContentLoaded', () => {
                                 toggleButton()
                             });
-                        </script>
+                        </script> #}
 
 
                         <!-- ================= item -->
                         <div class="col-lg-4">
-                            <a href="#" class="box in__wallet space-y-10" data-toggle="modal"
-                                data-target="#popup_connected">
-                                <div class="logo">
-                                    <img src="{{asset('assets/img/icons/torus.svg')}}" alt="logo_community">
-                                </div>
-                                <h5 class="text-center">torus</h5>
-                                <p class="text-center">Log in with Google, Facebook, or other OAuth providers</p>
-                            </a>
-                        </div>
-                        <!-- ================= item -->
-                        <div class="col-lg-4">
-                            <a href="#" class="box in__wallet space-y-10" data-toggle="modal"
-                                data-target="#popup_error">
-                                <div class="logo">
-                                    <img src="{{asset('assets/img/icons/fortmatic.svg')}}" alt="logo_community">
-                                </div>
-                                <h5 class="text-center">fortmatic</h5>
-                                <p class="text-center">wallet that allows you to sign up with your phone number on any
-                                    device</p>
-                            </a>
-                        </div>
-                        <!-- ================= item -->
-                        <div class="col-lg-4">
-                            <a href="#" class="box in__wallet space-y-10" data-toggle="modal"
-                                data-target="#popup_connected">
-                                <div class="logo">
-                                    <img src="{{asset('assets/img/icons/bitski.svg')}}" alt="logo_community">
-                                </div>
-                                <h5 class="text-center">bitski</h5>
-                                <p class="text-center">wallet that allows you to sign in with an email and password</p>
-                            </a>
-                        </div>
-                        <!-- ================= item -->
-                        <div class="col-lg-4">
-                            <a href="#" class="box in__wallet space-y-10" data-toggle="modal"
-                                data-target="#popup_error">
+                            <a  onclick="login_wallet_connect()" class="box in__wallet space-y-10">
                                 <div class="logo">
                                     <img src="{{asset('assets/img/icons/walletconnect.svg')}}" alt="logo_community">
                                 </div>
                                 <h5 class="text-center">walletconnect</h5>
-                                <p class="text-center">Log in with Google, Facebook, or other OAuth provider</p>
+                                <p class="text-center">Connecter avec WalletConnect</p>
                             </a>
                         </div>
+
+                        <script>
+                            const serverUrl = "https://ki2itix6o4jh.usemoralis.com:2053/server";
+                            const appId = "VL3LDJQmTElRkfJBW4NPZouBqdW4izurS9g7FHK6";
+                            Moralis.start({ serverUrl, appId })
+                            /* Authentication code */
+                            async function login_metaMask() {
+                                const user = await Moralis.authenticate();
+                                console.log(user);
+
+                            }
+
+                            async function login_coinbase() {
+                                // Use eth_RequestAccounts
+                                console.log('user')
+                            }
+
+                            async function login_wallet_connect(){
+                                //const user = await Moralis.authenticate({ provider: "walletconnect" });
+                                const user = await Moralis.authenticate({ 
+                                    provider: "walletconnect", 
+                                    mobileLinks: [
+                                      "rainbow",
+                                      "metamask",
+                                      "argent",
+                                      "trust",
+                                      "imtoken",
+                                      "pillar",
+                                    ] 
+                                })
+                                console.log(user);
+                            }
+                        </script>
                     </div>
                 </div>
             </div>
