@@ -2,9 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
@@ -13,18 +17,32 @@ class SecurityController extends AbstractController
     /**
      * @Route("/login", name="app_login")
      */
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(Request $request,AuthenticationUtils $authenticationUtils ,ManagerRegistry $doctrine ): Response
     {
         // if ($this->getUser()) {
         //      return $this->redirectToRoute('acceuil');
         //  }
+        
+            // $user_adresse = $request->get('data');
+            // dump($user_adresse);die;
+        
 
+        // $user_adresse = $request->get('data');
+        
+        // if ($user_adresse) {
+        //     $user =  $doctrine->getRepository(User::class)->findByAdressewallet($user_adresse);
+        // $email = (String) $user[0]->getEmail();
+       
+        // $password = (String) $user[0]->getPassword();
+        // }
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
+         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        return $this->render('security/login.html.twig',
+        ['last_username' => $lastUsername,'password'=>'$password' , 'user_adresse'=>'$user_adresse', 'error' => $error]
+    );
     }
 
     /**
@@ -36,24 +54,5 @@ class SecurityController extends AbstractController
     }
 
 
-    /**
-     * @Route("/login/wallet", name="login_wallet")
-     */    
-    public function registerWallet(Request $request, AuthenticationUtils $authenticationUtils): Response
-    {
-        /*$user = $request->get('data');
-        if($user){
-            $id = key_exists('id', $user)?$user['id']:null;
-        }*/
-        dump($request->get('wallet'));
-        dump($request->get('name'));
-        dump($request->get('email'));
-        $error = $authenticationUtils->getLastAuthenticationError();
-        $lastUsername = $authenticationUtils->getLastUsername();
-     
-        return $this->render('security/loginWallet.html.twig', ['last_username' => $lastUsername, 'error' => $error,
-        'user'=>$lastUsername
-
-    ]);
-    }
+    
 }

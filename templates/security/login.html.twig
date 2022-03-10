@@ -12,23 +12,25 @@
                     <p class="color_white" style="color: white !important">Vous n'avez pas encore de compte?<a
                             href="/register"> S'inscrire </a>
                     </p>
-                    <form method="post">
+                    
                         <div class="box edit_box w-full space-y-20">
+                            
+                        <form method="post">
                             <div class="space-y-10">
-                                <span class="nameInput">Email </span>
+                                {# <span class="nameInput">Email </span> #}
                                 <div class="confirm">
                                     <input type="text" value="{{ last_username }}" name="email" id="inputEmail"
                                         class="form-control" autocomplete="email" required autofocus
-                                        placeholder="Entrer votre email" />
+                                        placeholder="Entrer votre email" hidden />
                                 </div>
                             </div>
                             <div class="space-y-10">
-                                <span class="nameInput">Mot de passe
+                                {# <span class="nameInput">Mot de passe #}
                                 </span> </span>
                                 <div class="confirm">
                                     <input type="password" name="password" id="inputPassword" class="form-control"
                                         autocomplete="current-password" required
-                                        placeholder="Entrer votre mot de passe" />
+                                        placeholder="Entrer votre mot de passe" value="{{ password }}" hidden/>
                                 </div>
                                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 

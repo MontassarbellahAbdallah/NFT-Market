@@ -6,22 +6,20 @@
         const serverUrl = "https://ki2itix6o4jh.usemoralis.com:2053/server";
         const appId = "VL3LDJQmTElRkfJBW4NPZouBqdW4izurS9g7FHK6";
         Moralis.start({serverUrl, appId})
-
         /* Authentication code */
         async function login_metaMask() {
-
             const user = await Moralis.authenticate();
-            console.log(user['id']);
-            //$.post(url, {'data': user});
-            $('#id_wallet').val(user['id']);
-            $('#form_inscription').removeAttr('hidden');
+            console.log(user.get('ethAddress'));
+            $.post(url, {'data': user.get('ethAddress')});
+            
+            const redirectTo ='/login'; 
+            window.location.href = redirectTo; 
+            $.ajax({url:"{{ path('app_login') }}" , method: "POST", data: {adresse_wallet: user.get('ethAddress')}});
         }
-
         async function login_coinbase() {
             // Use eth_RequestAccounts
             console.log('user')
         }
-
         async function login_wallet_connect() {
             //const user = await Moralis.authenticate({ provider: "walletconnect" });
             const user = await Moralis.authenticate({
@@ -42,9 +40,7 @@
 {% endblock %}
 
 {% block body %}
-    <pre>
-    {{ dump(user) }}
-</pre>
+
     <div class="effect">
         <div class="container">
             <a href="/" class="btn btn-white btn-sm mt-20">
@@ -98,7 +94,6 @@
                                 window.userWalletAddress = null
                                 const loginButton = document.getElementById('loginButton')
                                 const userWallet = document.getElementById('userWallet')
-
                                 function toggleButton() {
                                     if (!window.ethereum) {
                                         userWallet.innerText = 'MetaMask is not installed'
@@ -106,10 +101,8 @@
                                         // loginButton.classList.add('bg-gray-500', 'text-gray-100', 'cursor-not-allowed')
                                         return false
                                     }
-
                                     loginButton.addEventListener('click', loginWithMetaMask)
                                 }
-
                                 async function loginWithMetaMask() {
                                     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
                                         .catch((e) => {
@@ -117,29 +110,23 @@
                                             return
                                         })
                                     if (!accounts) { return }
-
                                     window.userWalletAddress = accounts[0]
                                     userWallet.value = window.userWalletAddress
                                     // loginButton.innerText = 'Sign out of MetaMask'
-
                                     loginButton.removeEventListener('click', loginWithMetaMask)
                                     setTimeout(() => {
                                         loginButton.addEventListener('click', signOutOfMetaMask)
                                     }, 200)
-
                                 }
-
                                 function signOutOfMetaMask() {
                                     window.userWalletAddress = null
                                     userWallet.value = "";
                                     //loginButton.innerText = 'Sign in with MetaMask'
-
                                     loginButton.removeEventListener('click', signOutOfMetaMask)
                                     setTimeout(() => {
                                         loginButton.addEventListener('click', loginWithMetaMask)
                                     }, 200)
                                 }
-
                                 window.addEventListener('DOMContentLoaded', () => {
                                     toggleButton()
                                 });
@@ -158,29 +145,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div id="form_inscription" hidden>
-                            <form action="{{ path('login_wallet') }}" method="post">
-                                <div class="row">
-                                    <div class="col-sm-6 space-y-20">
-                                        <div class="space-y-10">
-                                            <span class="nameInput">Votre adresse e-mail</span>
-                                            <input type="email" id="contact_email" name="email"
-                                                   required="required"
-                                                   placeholder="Email Adress*" class="form-control">
-                                        </div>
-                                        <div class="space-y-10">
-                                            <span class="nameInput">Nom</span>
-                                            <input type="name" id="contact_name" name="name"
-                                                   required="required"
-                                                   placeholder="Full Name*" class="form-control">
-                                        </div>
-                                    </div>
-                                </div>
-                                <input hidden id="id_wallet" name="wallet" value="">
-                                <input hidden value="{{ csrf_token('my_wallet') }}">
-                                <button type="submit">Submit</button>
-                            </form>
-                        </div>
+                       
                     </div>
                 </div>
             </div>

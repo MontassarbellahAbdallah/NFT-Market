@@ -32,15 +32,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $username;
 
-    /**
-     * @ORM\Column(type="float")
+            /**
+     * @ORM\Column(type="string", length=180)
      */
-    private $solde;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $points;
+    private $adressewallet;
 
 
     /**
@@ -103,6 +98,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getAdressewallet(): ?string
+    {
+        return $this->adressewallet;
+    }
+
+    public function setAdressewallet(string $adressewallet): self
+    {
+        $this->adressewallet = $adressewallet;
+
+        return $this;
+    }
+
     public function getUserName(): ?string
     {
         return $this->username;
@@ -116,29 +123,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
 
-    public function getSolde(): ?string
-    {
-        return $this->solde;
-    }
 
-    public function setSolde(float $solde): self
-    {
-        $this->solde = $solde;
-
-        return $this;
-    }
-    
-    public function getPoints(): ?string
-    {
-        return $this->points;
-    }
-
-    public function setPoints(int $points): self
-    {
-        $this->points = $points;
-
-        return $this;
-    }
 
     public function getPhoto(): ?string
     {
