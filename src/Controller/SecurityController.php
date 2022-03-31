@@ -2,12 +2,13 @@
 
 namespace App\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-
+use App\Entity\User;
 class SecurityController extends AbstractController
 {
     /**
@@ -45,9 +46,8 @@ class SecurityController extends AbstractController
         if($user){
             $id = key_exists('id', $user)?$user['id']:null;
         }*/
-        dump($request->get('wallet'));
-        dump($request->get('name'));
-        dump($request->get('email'));
+        
+        dump($request->get('data'));
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
      
@@ -55,5 +55,23 @@ class SecurityController extends AbstractController
         'user'=>$lastUsername
 
     ]);
+    }
+    /**
+     * @Route("/test/wallet", name="test_wallet")
+     */
+    public function testwallet(Request $request,EntityManagerInterface $em): Response
+    {
+        $user = $request->get('data');
+        if($user){
+            $id = key_exists('id', $user)?$user['id']:null;
+            $user = $em->getRepository(User::class)->findOneBy(['id'=>$id]);
+            if(!$user){
+                $user = new User();
+
+                dump($user);die;
+
+            }
+            
+        }
     }
 }
