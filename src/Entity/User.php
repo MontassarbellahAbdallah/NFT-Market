@@ -86,6 +86,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $isVerified = false;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Collect::class, mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $collect;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -275,6 +280,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setBio(string $bio): self
     {
         $this->bio = $bio;
+
+        return $this;
+    }
+
+    public function getCollect(): ?Collect
+    {
+        return $this->collect;
+    }
+
+    public function setCollect(?Collect $collect): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($collect === null && $this->collect !== null) {
+            $this->collect->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($collect !== null && $collect->getUser() !== $this) {
+            $collect->setUser($this);
+        }
+
+        $this->collect = $collect;
 
         return $this;
     }

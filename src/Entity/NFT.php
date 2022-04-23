@@ -47,6 +47,11 @@ class NFT
      */
     private $email;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Collect::class, inversedBy="nfts")
+     */
+    private $collect;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -124,4 +129,15 @@ class NFT
         return $this;
     }
 
+    public function getCollect(): ?Collect
+    {
+        return $this->collect;
+    }
+
+    public function setCollect(?Collect $collect): self
+    {
+        $this->collect = $collect;
+
+        return $this;
+    }
 }
