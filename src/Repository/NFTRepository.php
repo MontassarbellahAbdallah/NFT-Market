@@ -47,4 +47,15 @@ class NFTRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findByName($value)
+    {
+        return $this->createQueryBuilder('n')
+            ->orWhere('n.titre like :val')
+            ->orWhere('n.description like :val')
+            ->setParameter('val', '%'.$value.'%')
+            ->orderBy('n.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

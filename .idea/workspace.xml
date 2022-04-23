@@ -5,6 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/sonarIssues.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarIssues.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/CollectionsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CollectionsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/NFTRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/NFTRepository.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -205,7 +206,7 @@
       <workItem from="1644779548277" duration="6107000" />
       <workItem from="1646558498570" duration="5338000" />
       <workItem from="1648731416178" duration="2450000" />
-      <workItem from="1650716035749" duration="3861000" />
+      <workItem from="1650716035749" duration="5827000" />
     </task>
     <task id="LOCAL-00001" summary="form inscription with id wallet">
       <created>1646563549847</created>
