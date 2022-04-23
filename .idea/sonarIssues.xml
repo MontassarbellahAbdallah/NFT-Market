@@ -33,6 +33,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../rjtraining-project/templates/coach/coach/exercices.html.twig">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../rjtraining-project/templates/day/add-exercice-day.html.twig">
+          <value>
+            <set />
+          </value>
+        </entry>
       </map>
     </option>
   </component>
